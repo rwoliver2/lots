@@ -25,8 +25,27 @@ ui.welcome
 name = ui.ask("What is your name?", /\w/)
 
 # Create a new player
-player = LOTS::Character.new(name, 
-  {:width => world.get_width, :height => world.get_height})
+player = LOTS::Character.new(name, {:width => world.get_width, :height => world.get_height})
 
-map = world.get_map(player)
-#ui.display_map(map)
+ui.new_line
+
+# TODO: Tell intro story
+
+# MAIN INPUT LOOP
+running = 1
+while running
+  cmd = ui.get_cmd
+  case cmd
+    when "map"
+      map = world.get_map(player)
+      ui.draw_frame(map)
+      ui.new_line
+    when "version", "ver"
+      ui.display_version
+    when "quit"
+      ui.quit
+      running = nil
+    else
+      ui.not_found
+  end
+end

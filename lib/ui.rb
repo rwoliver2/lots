@@ -63,11 +63,59 @@ class UI
     new_line
   end
 
-  private
-
-  def new_line
-    print "\n"
+  # Prints a new line. Optinally can print multiple lines.
+  def new_line(times = 1)
+    times.times do
+      print "\n"
+    end
   end
+
+  # Draw text surrounded in a nice frame
+  def draw_frame(text)
+    # Figure out width automatically
+    width = get_max_size_from_array(text)
+    draw_top_frame(width)
+    text.each do |t|
+      t_size = get_real_size(t)
+      draw_vert_frame_begin
+      if t.kind_of?(Array)
+        t.each do |s|
+          print s
+        end
+      else
+        print t
+      end
+      (width - (t_size + 4)).times do
+        print " " 
+      end
+      draw_vert_frame_end
+      new_line
+    end
+    draw_bottom_frame(width)
+  end
+
+  def display_version
+    puts "This is " + "Legend of the Sourcerer".light_red + " Version " + LOTS_VERSION.light_white
+    new_line
+  end
+  
+  def not_found
+    print "Command not understood. Please try again.".red
+    new_line(2)
+  end
+  
+  def quit
+    new_line
+    print "You abandoned your journey.".red
+    new_line(2)
+  end
+  
+  def get_cmd
+    print "\u2712 ".red + "Your command? ".light_white
+    return gets.chomp.downcase
+  end
+  
+  private
   
   def draw_vert_frame_begin
     print UI_FRAME_VERTICAL.yellow + " "
@@ -112,30 +160,6 @@ class UI
       max = s_size if s_size >= max
     end
     max + 4
-  end
-
-  # Draw text surrounded in a nice frame
-  def draw_frame(text)
-    # Figure out width automatically
-    width = get_max_size_from_array(text)
-    draw_top_frame(width)
-    text.each do |t|
-      t_size = get_real_size(t)
-      draw_vert_frame_begin
-      if t.kind_of?(Array)
-        t.each do |s|
-          print s
-        end
-      else
-        print t
-      end
-      (width - (t_size + 4)).times do
-        print " " 
-      end
-      draw_vert_frame_end
-      new_line
-    end
-    draw_bottom_frame(width)
   end
 
 end
