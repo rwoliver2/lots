@@ -32,17 +32,22 @@ class UI
 
   # Ask user a question. A regular expression filter can be applied.
   def ask(question, filter = nil)
-    print question + " "
     if filter
       match = false
       answer = nil
       while match == false
+        print "\u2712 ".red + question.light_white + " "
         answer = gets.chomp
-	if answer.match(filter)
-	  return answer
-	end
+	    if answer.match(filter)
+	      return answer
+        else
+          print "Sorry, please try again.".red
+          new_line
+          new_line
+        end
       end
     else
+      print "\u2712 ".red + question.light_white + " "
       return gets.chomp
     end
   end
@@ -55,6 +60,7 @@ class UI
     text << "Copyright \u00A9 Sourcerer, All Rights Reserved.".white
     text << "Licensed under GPLv3.".white
     draw_frame(text)
+    new_line
   end
 
   private
@@ -91,7 +97,11 @@ class UI
 
   # Returns actual length of text accounting for UTF-8 and ANSI
   def get_real_size(text)
-    text.uncolorize.size
+    if text.kind_of?(Array)
+      text.size
+    else
+      text.uncolorize.size
+    end
   end
 
   # Returns size of longest string in array
@@ -99,7 +109,7 @@ class UI
     max = 0
     array.each do |s|
       s_size = get_real_size(s)
-      max = s_size if s_size > max
+      max = s_size if s_size >= max
     end
     max + 4
   end
@@ -112,7 +122,13 @@ class UI
     text.each do |t|
       t_size = get_real_size(t)
       draw_vert_frame_begin
-      print t
+      if t.kind_of?(Array)
+        t.each do |s|
+          print s
+        end
+      else
+        print t
+      end
       (width - (t_size + 4)).times do
         print " " 
       end

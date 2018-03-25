@@ -13,11 +13,20 @@ require_relative "lib/ui"
 require_relative "lib/world"
 require_relative "lib/character"
 
+# Create a new UI and world
 ui = LOTS::UI.new
 world = LOTS::World.new
 
+# Clear the screen and print welcome message
 ui.clear
 ui.welcome
 
-map = world.get_map
-ui.display_map(map)
+# Ask name
+name = ui.ask("What is your name?", /\w/)
+
+# Create a new player
+player = LOTS::Character.new(name, 
+  {:width => world.get_width, :height => world.get_height})
+
+map = world.get_map(player)
+#ui.display_map(map)
