@@ -17,6 +17,9 @@ UI_FRAME_LOWER_LEFT = "\u2517"
 UI_FRAME_UPPER_RIGHT = "\u2513"
 UI_FRAME_LOWER_RIGHT = "\u251B"
 
+UI_COPYRIGHT = "\u00A9"
+UI_EMAIL = "\u2709"
+
 class UI
 
   # Clear the screen
@@ -56,8 +59,8 @@ class UI
   def welcome
     text = Array.new
     text << "Legend of the Sourcerer".light_green
-    text << "Written by Robert W. Oliver II  ".white + "\u2709".light_white + " robert@cidergrove.com".white
-    text << "Copyright \u00A9 Sourcerer, All Rights Reserved.".white
+    text << "Written by Robert W. Oliver II ".white + UI_EMAIL.light_white + " robert@cidergrove.com".white
+    text << "Copyright " + UI_COPYRIGHT + " Sourcerer, All Rights Reserved.".white
     text << "Licensed under GPLv3.".white
     draw_frame(text)
     new_line
@@ -101,7 +104,7 @@ class UI
   
   def not_found
     print "Command not understood. Please try again.".red
-    new_line(2)
+    new_line
   end
   
   def quit
@@ -111,6 +114,7 @@ class UI
   end
   
   def get_cmd
+		print "Type ".white + "help".light_white + " for possible commands.\n"
     print "\u2712 ".red + "Your command? ".light_white
     return gets.chomp.downcase
   end

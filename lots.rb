@@ -12,6 +12,7 @@ require 'colorize'
 require_relative "lib/ui"
 require_relative "lib/world"
 require_relative "lib/character"
+require_relative "lib/story"
 
 # Create a new UI and world
 ui = LOTS::UI.new
@@ -25,24 +26,33 @@ ui.welcome
 name = ui.ask("What is your name?", /\w/)
 
 # Create a new player
-player = LOTS::Character.new(name, {:width => world.get_width, :height => world.get_height})
+player = LOTS::Character.new(name, world)
 
+# Show intro story
 ui.new_line
-
-# TODO: Tell intro story
+story = LOTS::Story.new
+ui.draw_frame(story.intro)
 
 # MAIN INPUT LOOP
 running = 1
 while running
-  cmd = ui.get_cmd
+  ui.new_line
+	cmd = ui.get_cmd
   case cmd
     when "map"
       map = world.get_map(player)
       ui.draw_frame(map)
-      ui.new_line
     when "version", "ver"
       ui.display_version
-    when "quit"
+	  when "up", "north"
+			player.y -= 1
+    when "down", "south"
+			player.y += 1
+  	when "left", "west"
+			player.x -= 1
+  	when "right", "east"
+			player.x += 1
+		when "quit"
       ui.quit
       running = nil
     else
