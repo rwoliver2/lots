@@ -118,6 +118,11 @@ class UI
     print "\u2712 ".red + "Your command? ".light_white
     return gets.chomp.downcase
   end
+	
+	def out_of_bounds
+		print "x".red + " Requested move out of bounds."
+		new_line
+	end
   
   private
   

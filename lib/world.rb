@@ -99,6 +99,21 @@ class World
     
     return buffer
   end
+	
+	def check_area(player, world, ui, story)
+		x = player.x
+		y = player.y
+		the_map = world.map 
+		current_area = the_map[y][x]
+		case current_area
+		  when MAP_KEY_TREE
+				ui.draw_frame story.area_tree
+		  when MAP_KEY_WATER
+				ui.draw_frame story.area_water
+		  when MAP_KEY_MOUNTAIN
+				ui.draw_frame story.area_mountain
+		end
+	end
 
   private
 

@@ -16,12 +16,36 @@ STORY_INTRO = [
 "He will provide the insight you need."
 ]
 
+STORY_AREA_TREE = [
+	"You see a magnificent tree standing tall above you."
+]
+
+STORY_AREA_WATER = [
+	"You stand next to the banks of a crystal-clear lake."
+]
+
+STORY_AREA_MOUNTAIN = [
+  "A majestic snow-topped mountain range graces the horizon."
+]
+
 class Story
 
 	def intro
 		return STORY_INTRO
 	end
 
+	def area_tree
+		return STORY_AREA_TREE
+	end
+	
+	def area_water
+		return STORY_AREA_WATER
+	end
+	
+	def area_mountain
+		return STORY_AREA_MOUNTAIN
+	end
+	
 end
 
 end

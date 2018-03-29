@@ -35,6 +35,7 @@ ui.draw_frame(story.intro)
 
 # MAIN INPUT LOOP
 running = 1
+in_battle = 0
 while running
   ui.new_line
 	cmd = ui.get_cmd
@@ -44,15 +45,15 @@ while running
       ui.draw_frame(map)
     when "version", "ver"
       ui.display_version
-	  when "up", "north"
-			player.y -= 1
+    when "up", "north"
+      player.move(:up, world, ui, story)
     when "down", "south"
-			player.y += 1
-  	when "left", "west"
-			player.x -= 1
-  	when "right", "east"
-			player.x += 1
-		when "quit"
+      player.move(:down, world, ui, story)
+    when "left", "west"
+      player.move(:left, world, ui, story)
+    when "right", "east"
+      player.move(:right, world, ui, story)
+    when "quit"
       ui.quit
       running = nil
     else

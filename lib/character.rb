@@ -29,6 +29,40 @@ class Character
 		@y = world.get_height
     return "Welcome %{name}! Let's play Legend of the Sourcerer!"
   end
+	
+	def move(direction, world, ui, story)
+		case direction
+		  when :up
+			  if @y > 1
+					@y -= 1
+				else
+					ui.out_of_bounds
+					return false
+				end
+			when :down
+			  if @y < world.get_height
+					@y += 1
+				else
+					ui.out_of_bounds
+					return false
+				end
+			when :left
+			  if @x > 1
+					@x -= 1
+				else
+					ui.out_of_bounds
+					return false
+				end
+			when :right
+			  if @x < world.get_width
+					@x += 1
+				else
+					ui.out_of_bounds
+					return false
+				end
+		end
+		world.check_area(self, world, ui, story)
+	end
     
 end
 
