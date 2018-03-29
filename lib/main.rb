@@ -32,10 +32,10 @@ ui.draw_frame({:text => map})
 
 # MAIN INPUT LOOP
 running = 1
-in_battle = 0
+player.in_combat = false
 while running
   ui.new_line
-	cmd = ui.get_cmd
+  cmd = ui.get_cmd
   case cmd
     when "map"
       map = world.get_map({:player => player})
@@ -46,14 +46,32 @@ while running
       ui.display_name({:player => player})
     when "location", "loc", "where", "whereami"
       ui.show_location({:player => player})
-    when "up", "north"
-      player.move({:direction => :up, :world => world, :ui => ui, :story => story})
-    when "down", "south"
-      player.move({:direction => :down, :world => world, :ui => ui, :story => story})
-    when "left", "west"
-      player.move({:direction => :left, :world => world, :ui => ui, :story => story})
-    when "right", "east"
-      player.move({:direction => :right, :world => world, :ui => ui, :story => story})
+    when "look", "what", "around"
+      world.check_area({:player => player, :ui => ui, :story => story})     
+    when "up", "north", "u", "n"
+      unless player.in_combat
+        player.move({:direction => :up, :world => world, :ui => ui, :story => story})
+      else
+        ui.cannot_travel_combat
+      end
+    when "down", "south", "d", "s"
+      unless player.in_combat
+        player.move({:direction => :down, :world => world, :ui => ui, :story => story})
+      else
+        ui.cannot_travel_combat
+      end
+    when "left", "west", "l", "w"
+      unless player.in_combat
+        player.move({:direction => :left, :world => world, :ui => ui, :story => story})
+      else
+        ui.cannot_travel_combat
+      end
+    when "right", "east", "r", "e"
+      unless player.in_combat
+        player.move({:direction => :right, :world => world, :ui => ui, :story => story})
+      else
+        ui.cannot_travel_combat
+      end
     when "quit"
       ui.quit
       running = nil

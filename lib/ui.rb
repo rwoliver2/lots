@@ -116,7 +116,11 @@ class UI
     print "Use the " + "map".light_white + " command to see the map."
     new_line
   end
-  
+ 
+  def cannot_travel_combat
+    puts "You are in combat and cannot travel!"
+  end
+
   def quit
     new_line
     print "You abandoned your journey.".red
@@ -124,7 +128,7 @@ class UI
   end
   
   def get_cmd
-		print "Type ".white + "help".light_white + " for possible commands.\n"
+    print "Type ".white + "help".light_white + " for possible commands.\n"
     print "\u2712 ".red + "Your command? ".light_white
     return gets.chomp.downcase
   end

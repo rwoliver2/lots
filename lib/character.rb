@@ -17,7 +17,8 @@ class Character
   attr_accessor :level
   attr_accessor :str
   attr_accessor :int
-  
+  attr_accessor :in_combat
+
   def initialize (args)
     name = args[:name]
     world = args[:world]
@@ -28,7 +29,8 @@ class Character
     @str = 5
     @int = 5
     @x = 1
-		@y = world.get_height
+    @y = world.get_height
+    @in_combat = false
     return "Welcome %{name}! Let's play Legend of the Sourcerer!"
   end
 	

@@ -20,34 +20,42 @@ STORY_INTRO = [
 ]
 
 STORY_AREA_TREE = [
-	"You see a magnificent tree standing tall above you."
+  "You see a magnificent tree standing tall above you."
 ]
 
 STORY_AREA_WATER = [
-	"You stand next to the banks of a crystal-clear lake."
+  "You stand on the banks of a crystal-clear lake."
 ]
 
 STORY_AREA_MOUNTAIN = [
   "A majestic snow-topped mountain range graces the horizon."
 ]
 
+STORY_AREA_ENEMY = [
+  "You encounter an enemy!"
+]
+
 class Story
 
-	def intro
-		return STORY_INTRO
-	end
+  def intro
+    return STORY_INTRO
+  end
 
-	def area_tree
-		return STORY_AREA_TREE
-	end
+  def area_tree
+    return STORY_AREA_TREE
+  end
 	
-	def area_water
-		return STORY_AREA_WATER
-	end
+  def area_water
+    return STORY_AREA_WATER
+  end
 	
-	def area_mountain
-		return STORY_AREA_MOUNTAIN
-	end
+  def area_mountain
+    return STORY_AREA_MOUNTAIN
+  end
+
+  def area_enemy
+    return STORY_AREA_ENEMY
+  end
 	
 end
 

@@ -101,22 +101,25 @@ class World
   end
 	
   # Check the current area on the map and describe it
-	def check_area(args)
+  def check_area(args)
     player = args[:player]
     ui = args[:ui]
     story = args[:story]
-		x = player.x
-		y = player.y
+    x = player.x
+    y = player.y
     current_area = @the_map[y-1][x-1]
-		case current_area
-		  when MAP_KEY_TREE
-				ui.draw_frame({:text => story.area_tree})
-		  when MAP_KEY_WATER
-				ui.draw_frame({:text => story.area_water})
-		  when MAP_KEY_MOUNTAIN
-				ui.draw_frame({:text => story.area_mountain})
-		end
-	end
+    case current_area
+      when MAP_KEY_TREE
+        ui.draw_frame({:text => story.area_tree})
+      when MAP_KEY_WATER
+        ui.draw_frame({:text => story.area_water})
+      when MAP_KEY_MOUNTAIN
+        ui.draw_frame({:text => story.area_mountain})
+      when MAP_KEY_ENEMY
+	ui.draw_frame({:text => story.area_enemy})
+	player.in_combat = 1
+    end
+  end
 
   private
 
