@@ -40,12 +40,11 @@ MAP_SOURCERER_Y = 1
 
 class World
 
-  attr_reader :map
+  attr_reader :the_map
 
   def initialize
     # Set initial world map
     generate_map
-    puts map.inspect
   end
 
   def get_width
@@ -57,11 +56,12 @@ class World
   end
   
   # Return map data in a display format
-  def get_map(player)
+  def get_map(args)
+    player = args[:player]
     buffer = Array.new
     x = 1
     y = 1
-    @map.each do |row|
+    @the_map.each do |row|
       tmp_row = Array.new
       x = 1
       row.each do |col|
@@ -100,18 +100,21 @@ class World
     return buffer
   end
 	
-	def check_area(player, world, ui, story)
+  # Check the current area on the map and describe it
+	def check_area(args)
+    player = args[:player]
+    ui = args[:ui]
+    story = args[:story]
 		x = player.x
 		y = player.y
-		the_map = world.map 
-		current_area = the_map[y][x]
+    current_area = @the_map[y-1][x-1]
 		case current_area
 		  when MAP_KEY_TREE
-				ui.draw_frame story.area_tree
+				ui.draw_frame({:text => story.area_tree})
 		  when MAP_KEY_WATER
-				ui.draw_frame story.area_water
+				ui.draw_frame({:text => story.area_water})
 		  when MAP_KEY_MOUNTAIN
-				ui.draw_frame story.area_mountain
+				ui.draw_frame({:text => story.area_mountain})
 		end
 	end
 
@@ -136,7 +139,7 @@ class World
       tmp_map << tmp_row
       tmp_row = nil
     end
-    @map = tmp_map
+    @the_map = tmp_map
 
   end
 

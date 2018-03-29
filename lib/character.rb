@@ -18,7 +18,9 @@ class Character
   attr_accessor :str
   attr_accessor :int
   
-  def initialize (name, world)
+  def initialize (args)
+    name = args[:name]
+    world = args[:world]
     @name = name
     @level = 1
     @health = 100
@@ -30,7 +32,11 @@ class Character
     return "Welcome %{name}! Let's play Legend of the Sourcerer!"
   end
 	
-	def move(direction, world, ui, story)
+	def move(args)
+    direction = args[:direction]
+    world = args[:world]
+    ui = args[:ui]
+    story = args[:story]
 		case direction
 		  when :up
 			  if @y > 1
@@ -61,7 +67,7 @@ class Character
 					return false
 				end
 		end
-		world.check_area(self, world, ui, story)
+		world.check_area({:player => self, :ui => ui, :story => story})
 	end
     
 end

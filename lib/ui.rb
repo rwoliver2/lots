@@ -27,10 +27,11 @@ class UI
     print "\e[H\e[2J"
   end
 
-  def display_map(map)
-    puts
-    draw_frame(map)
-    puts
+  def display_map(args)
+    map = args[:map]
+    new_line
+    draw_frame({:text => map})
+    new_line
   end
 
   # Ask user a question. A regular expression filter can be applied.
@@ -62,7 +63,7 @@ class UI
     text << "Written by Robert W. Oliver II ".white + UI_EMAIL.light_white + " robert@cidergrove.com".white
     text << "Copyright " + UI_COPYRIGHT + " Sourcerer, All Rights Reserved.".white
     text << "Licensed under GPLv3.".white
-    draw_frame(text)
+    draw_frame({:text => text})
     new_line
   end
 
@@ -74,8 +75,9 @@ class UI
   end
 
   # Draw text surrounded in a nice frame
-  def draw_frame(text)
+  def draw_frame(args)
     # Figure out width automatically
+    text = args[:text]
     width = get_max_size_from_array(text)
     draw_top_frame(width)
     text.each do |t|
@@ -104,6 +106,14 @@ class UI
   
   def not_found
     print "Command not understood. Please try again.".red
+    new_line
+  end
+	
+  def show_location(args)
+    player = args[:player]
+    print "You are currently on row " + player.y.to_s.light_white + ", column " + player.x.to_s.light_white
+    new_line
+    print "Use the " + "map".light_white + " command to see the map."
     new_line
   end
   

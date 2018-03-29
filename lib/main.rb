@@ -19,12 +19,12 @@ ui.welcome
 name = ui.ask("What is your name?", /\w/)
 
 # Create a new player
-player = LOTS::Character.new(name, world)
+player = LOTS::Character.new({:name => name, :world => world})
 
 # Show intro story
 ui.new_line
 story = LOTS::Story.new
-ui.draw_frame(story.intro)
+ui.draw_frame({:text => story.intro})
 
 # MAIN INPUT LOOP
 running = 1
@@ -34,18 +34,20 @@ while running
 	cmd = ui.get_cmd
   case cmd
     when "map"
-      map = world.get_map(player)
-      ui.draw_frame(map)
+      map = world.get_map({:player => player})
+      ui.draw_frame({:text => map})
     when "version", "ver"
       ui.display_version
+    when "location", "loc", "where", "whereami"
+      ui.show_location({:player => player})
     when "up", "north"
-      player.move(:up, world, ui, story)
+      player.move({:direction => :up, :world => world, :ui => ui, :story => story})
     when "down", "south"
-      player.move(:down, world, ui, story)
+      player.move({:direction => :down, :world => world, :ui => ui, :story => story})
     when "left", "west"
-      player.move(:left, world, ui, story)
+      player.move({:direction => :left, :world => world, :ui => ui, :story => story})
     when "right", "east"
-      player.move(:right, world, ui, story)
+      player.move({:direction => :right, :world => world, :ui => ui, :story => story})
     when "quit"
       ui.quit
       running = nil
