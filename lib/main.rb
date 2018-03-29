@@ -7,13 +7,6 @@
 
 LOTS_VERSION = "1.00"
 
-require 'colorize'
-
-require_relative "lib/ui"
-require_relative "lib/world"
-require_relative "lib/character"
-require_relative "lib/story"
-
 # Create a new UI and world
 ui = LOTS::UI.new
 world = LOTS::World.new

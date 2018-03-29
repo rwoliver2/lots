@@ -36,5 +36,5 @@ require_relative "lib/character"
 require_relative "lib/story"
 
 # Start
-require_relative "main.rb"
+require_relative "lib/main"
 
