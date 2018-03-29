@@ -32,12 +32,18 @@ ui.draw_frame({:text => map})
 
 # MAIN INPUT LOOP
 running = 1
-player.in_combat = false
 while running
   ui.new_line
+  # Is player in combat but has no enemy? Assign one.
+  if player.in_combat && !player.current_enemy
+    enemy = LOTS::Enemy.new
+    player.current_enemy
+    ui.enemy_greet({:enemy => enemy})
+  end
+  # Get command from user
   cmd = ui.get_cmd
   case cmd
-    when "map"
+    when "map", "m"
       map = world.get_map({:player => player})
       ui.draw_frame({:text => map})
     when "version", "ver"
@@ -72,6 +78,20 @@ while running
       else
         ui.cannot_travel_combat
       end
+    when "attack", "a"
+      if player.in_combat
+        # TODO: Attack enemy
+      else
+        ui.not_in_combat
+      end
+    when "cast", "spell"
+      if player.in_combat
+        # TODO: Cast a spell
+      else
+        ui.not_in_combat
+      end
+    when "enemy"
+      puts enemy.inspect
     when "quit"
       ui.quit
       running = nil

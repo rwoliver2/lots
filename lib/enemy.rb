@@ -28,7 +28,7 @@ class Enemy
   attr_accessor :int
   attr_accessor :lines
   
-  def initialize(args)
+  def initialize(args = nil)
     # Pick a random enemy
     selected_enemy = ENEMY_CATALOG.sample[0]    
     @name = selected_enemy[:name]

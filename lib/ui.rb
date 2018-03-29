@@ -121,6 +121,10 @@ class UI
     puts "You are in combat and cannot travel!"
   end
 
+  def not_in_combat
+    puts "You are not in combat."
+  end
+
   def quit
     new_line
     print "You abandoned your journey.".red
@@ -133,10 +137,10 @@ class UI
     return gets.chomp.downcase
   end
 	
-	def out_of_bounds
-		print "x".red + " Requested move out of bounds."
-		new_line
-	end
+  def out_of_bounds
+    print "x".red + " Requested move out of bounds."
+    new_line
+  end
   
   def display_name(args)
     player = args[:player]
@@ -144,6 +148,13 @@ class UI
     new_line    
   end
   
+  def enemy_greet(args)
+    enemy = args[:enemy]
+    print enemy.name.light_white + " attacks!"
+    new_line
+    new_line
+  end
+
   private
   
   def draw_vert_frame_begin

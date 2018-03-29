@@ -19,6 +19,9 @@ rescue LoadError
   puts "Debian/Ubuntu Linux:"
   puts "  sudo apt install ruby-colorize"
   puts
+  puts "Other Linux Distros:"
+  puts "  gem install colorize"
+  puts
   puts "Windows:"
   puts "  gem install colorize"
   puts
