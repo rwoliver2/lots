@@ -134,6 +134,12 @@ class UI
 		new_line
 	end
   
+  def display_name(args)
+    player = args[:player]
+    print "You are " + player.name.light_white + ". Have you forgotten your own name?"
+    new_line    
+  end
+  
   private
   
   def draw_vert_frame_begin

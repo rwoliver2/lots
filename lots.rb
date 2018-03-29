@@ -34,6 +34,7 @@ require_relative "lib/ui"
 require_relative "lib/world"
 require_relative "lib/character"
 require_relative "lib/story"
+require_relative "lib/enemy"
 
 # Start
 require_relative "lib/main"

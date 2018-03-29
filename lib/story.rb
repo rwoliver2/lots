@@ -13,7 +13,10 @@ module LOTS
 STORY_INTRO = [
 "Your journey to discover your true potential has been arduous, but a glimmer of hope shines in the darkness.",
 "A vivid dream stirrs you from your sleep. You are instructed to visit the " + "Sourcerer".light_white + ", the Oracle of the Path.",
-"He will provide the insight you need."
+"You feel certain he will provide the insight you need. Inspired, you carry on.",
+"",
+"At the end of the day's travel, you set up camp and find an old " + "map".light_white + " at the base of a tree.",
+"You gaze at the ancient parchment, studying the path ahead."
 ]
 
 STORY_AREA_TREE = [

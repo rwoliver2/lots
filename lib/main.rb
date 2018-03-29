@@ -26,6 +26,10 @@ ui.new_line
 story = LOTS::Story.new
 ui.draw_frame({:text => story.intro})
 
+# Show the map for the first time
+map = world.get_map({:player => player})
+ui.draw_frame({:text => map})
+
 # MAIN INPUT LOOP
 running = 1
 in_battle = 0
@@ -38,6 +42,8 @@ while running
       ui.draw_frame({:text => map})
     when "version", "ver"
       ui.display_version
+    when "name", "whoami"
+      ui.display_name({:player => player})
     when "location", "loc", "where", "whereami"
       ui.show_location({:player => player})
     when "up", "north"
