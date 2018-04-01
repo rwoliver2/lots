@@ -34,6 +34,7 @@ class Enemy
     @name = selected_enemy[:name]
     @health = selected_enemy[:health] + rand(0..3)
     @mana = selected_enemy[:mana] + rand(0..3)
+    @str = selected_enemy[:str]
     @lines = selected_enemy[:lines]
     @int = rand(2..6)
   end

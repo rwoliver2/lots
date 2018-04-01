@@ -34,12 +34,6 @@ ui.draw_frame({:text => map})
 running = 1
 while running
   ui.new_line
-  # Is player in combat but has no enemy? Assign one.
-  if player.in_combat && !player.current_enemy
-    enemy = LOTS::Enemy.new
-    player.current_enemy
-    ui.enemy_greet({:enemy => enemy})
-  end
   # Get command from user
   cmd = ui.get_cmd
   case cmd
@@ -56,31 +50,46 @@ while running
       world.check_area({:player => player, :ui => ui, :story => story})     
     when "up", "north", "u", "n"
       unless player.in_combat
-        player.move({:direction => :up, :world => world, :ui => ui, :story => story})
+        if !player.move({:direction => :up, :world => world, :ui => ui, :story => story})
+          player.in_combat = 1
+	end
       else
         ui.cannot_travel_combat
       end
     when "down", "south", "d", "s"
       unless player.in_combat
-        player.move({:direction => :down, :world => world, :ui => ui, :story => story})
+        if !player.move({:direction => :down, :world => world, :ui => ui, :story => story})
+          player.in_combat = 1
+	end
       else
         ui.cannot_travel_combat
       end
     when "left", "west", "l", "w"
       unless player.in_combat
-        player.move({:direction => :left, :world => world, :ui => ui, :story => story})
+        if !player.move({:direction => :left, :world => world, :ui => ui, :story => story})
+          player.in_combat = 1
+	end
       else
         ui.cannot_travel_combat
       end
     when "right", "east", "r", "e"
       unless player.in_combat
-        player.move({:direction => :right, :world => world, :ui => ui, :story => story})
+        if !player.move({:direction => :right, :world => world, :ui => ui, :story => story})
+          player.in_combat = 1
+	end
       else
         ui.cannot_travel_combat
       end
     when "attack", "a"
       if player.in_combat
-        # TODO: Attack enemy
+        retval = player.attack({:enemy => player.current_enemy})
+	if retval == LOTS::ENEMY_KILLED
+          player.current_enemy = nil
+	  player.in_combat = false
+	end
+	if retval.is_a? Numeric
+          player.current_enemy.health -= retval
+	end
       else
         ui.not_in_combat
       end
@@ -97,5 +106,11 @@ while running
       running = nil
     else
       ui.not_found
+  end
+  # Is player in combat but has no enemy? Assign one.
+  if player.in_combat && !player.current_enemy
+    enemy = LOTS::Enemy.new
+    player.current_enemy = enemy
+    ui.enemy_greet({:enemy => enemy})
   end
 end

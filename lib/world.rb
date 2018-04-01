@@ -117,8 +117,9 @@ class World
         ui.draw_frame({:text => story.area_mountain})
       when MAP_KEY_ENEMY
 	ui.draw_frame({:text => story.area_enemy})
-	player.in_combat = 1
+	return false
     end
+    return true
   end
 
   private
