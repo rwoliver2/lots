@@ -1,6 +1,10 @@
 # Legend of the Sourcerer
 
-Written by Robert W. Oliver II <robert@cidergrove.com>
+Written by Robert W. Oliver II
+
+* Email: robert@cidergrove.com
+* Sourcerer: https://sourcerer.io/rwoliver2
+* Twitter: @rwoliver2
 
 # Copyright
 
