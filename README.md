@@ -1,5 +1,8 @@
 # Legend of the Sourcerer
 
+Legend of the Sourcerer is an open-source text-based adventure game written in Ruby.
+
+# Credits 
 Written by Robert W. Oliver II
 
 * Email: robert@cidergrove.com
