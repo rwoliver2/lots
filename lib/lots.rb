@@ -33,12 +33,12 @@ rescue LoadError
 end
 
 # Require libraries
-require_relative "lib/ui"
-require_relative "lib/world"
-require_relative "lib/character"
-require_relative "lib/story"
-require_relative "lib/enemy"
+require_relative "ui"
+require_relative "world"
+require_relative "character"
+require_relative "story"
+require_relative "enemy"
 
 # Start
-require_relative "lib/main"
+require_relative "main"
 
