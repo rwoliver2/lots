@@ -19,6 +19,8 @@ ENEMY_CATALOG = [
   [:name => "Angry Fae", :health => 3, :mana => 10, :str => 2, :lines => 5]
 ]
 
+PLAYER_DEAD = "PLAYER_DEAD"
+
 class Enemy
 
   attr_accessor :name
@@ -38,7 +40,32 @@ class Enemy
     @lines = selected_enemy[:lines]
     @int = rand(2..6)
   end
-  
+ 
+  # Enemy attacks player
+  def attack(args)
+    enemy = self
+    player = args[:player]
+    
+    # Does the enemy even hit the player?
+    str_diff = (enemy.str - player.str) * 2
+    hit_chance = rand(1...100) + str_diff
+
+    if (hit_chance > 30)
+      # Determine value of the attack
+      attack_value = rand(1...player.str)
+      print enemy.name.light_red + " hits you for " + attack_value.to_s.light_yellow + " damage!\n"
+      if attack_value > player.health
+	return PLAYER_DEAD
+      else
+	return attack_value
+      end
+    else
+      print enemy.name.light_red + " misses you!\n"
+    end
+    return true
+  end
+	
+
 end
 
 end

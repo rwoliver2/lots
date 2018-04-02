@@ -25,6 +25,7 @@ class Character
   attr_accessor :in_combat
   attr_accessor :current_enemy
   attr_accessor :lines
+  attr_accessor :dead
 
   def initialize (args)
     name = args[:name]
@@ -40,6 +41,7 @@ class Character
     @in_combat = false
     @current_enemy = nil
     @lines = 0
+    @dead = 0
     return "Welcome %{name}! Let's play Legend of the Sourcerer!"
   end
 
@@ -60,15 +62,16 @@ class Character
       # Determine value of the attack
       attack_value = rand(1...player.str) + ATTACK_VALUE_MODIFIER
       if attack_value > enemy.health
-        print "You swing and " + "hit".light_yellow + " the " + enemy.name + " for " + attack_value.to_s.light_white + " damage, killing it!\n"
+	print "You swing and " + "hit".light_yellow + " the " + enemy.name.light_red + " for " + attack_value.to_s.light_white + " damage, killing it!\n"
 	print "You gain " + enemy.lines.to_s.light_white + " lines of code.\n"
 	return ENEMY_KILLED
       else
-        print "You swing and " + "hit".light_yellow + " the " + enemy.name + " for " + attack_value.to_s.light_white + " damage!\n"
+	print "You swing and " + "hit".light_yellow + " the " + enemy.name.light_red + " for " + attack_value.to_s.light_white + " damage!\n"
 	return attack_value
       end
     else
       print "You swing and " + "miss".light_red + " the " + enemy.name + "!\n"
+      return 0
     end
     return true
   end

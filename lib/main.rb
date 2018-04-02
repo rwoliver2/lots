@@ -89,6 +89,13 @@ while running
 	end
 	if retval.is_a? Numeric
           player.current_enemy.health -= retval
+	  retval = player.current_enemy.attack({:player => player})
+	  if retval.is_a? Numeric
+            player.health -= retval
+          end
+	  if retval == LOTS::PLAYER_DEAD
+            player.dead = 1
+	  end
 	end
       else
         ui.not_in_combat
@@ -101,6 +108,8 @@ while running
       end
     when "enemy"
       puts enemy.inspect
+    when "suicide"
+      player.dead = 1
     when "quit"
       ui.quit
       running = nil
@@ -112,5 +121,10 @@ while running
     enemy = LOTS::Enemy.new
     player.current_enemy = enemy
     ui.enemy_greet({:enemy => enemy})
+  end
+  # Player is dead!
+  if player.dead == 1
+      ui.player_dead({:story => story})
+    exit
   end
 end

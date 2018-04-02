@@ -27,6 +27,7 @@ MAP_POSSIBLE_KEYS = [
   MAP_KEY_WATER,
   MAP_KEY_GRASS,
   MAP_KEY_MOUNTAIN,
+  MAP_KEY_ENEMY,
   MAP_KEY_ENEMY
 ]
 
@@ -65,32 +66,32 @@ class World
       tmp_row = Array.new
       x = 1
       row.each do |col|
-				placed = 0
-				# Place sourcerer
-				if x == MAP_SOURCERER_X and y == MAP_SOURCERER_Y
-					tmp_row << MAP_KEY_SOURCERER.colorize(:color => :blue, :background => :light_white)
-					placed = 1
-				end
+        placed = 0
+        # Place sourcerer
+        if x == MAP_SOURCERER_X and y == MAP_SOURCERER_Y
+          tmp_row << MAP_KEY_SOURCERER.colorize(:color => :blue, :background => :light_white)
+          placed = 1
+        end
         # If player is here, display them
         if x == player.x and y == player.y
-          tmp_row << MAP_KEY_PLAYER.colorize(:color => :light_white, :background => :red)
-					placed = 1
-				end
-				# If we haven't already placed the character, run through the rest of the options
-				if placed == 0
-				  case col
-	          when MAP_KEY_TREE
-	            tmp_row << col.colorize(:color => :light_green, :background => :green)
+          tmp_row << MAP_KEY_PLAYER.colorize(:color => :light_white, :background => :red) 
+          placed = 1
+        end
+        # If we haven't already placed the character, run through the rest of the options
+        if placed == 0
+	  case col
+	    when MAP_KEY_TREE
+	      tmp_row << col.colorize(:color => :light_green, :background => :green)
             when MAP_KEY_GRASS
-	            tmp_row << col.colorize(:color => :green, :background => :green)
-					  when MAP_KEY_WATER
-	            tmp_row << col.colorize(:color => :white, :background => :blue)
-	          when MAP_KEY_MOUNTAIN
-	            tmp_row << col.colorize(:color => :yellow, :background => :green)
-	          when MAP_KEY_ENEMY
-	            tmp_row << col.colorize(:color => :red, :background => :green)
-				  end
-				end
+	      tmp_row << col.colorize(:color => :green, :background => :green)
+            when MAP_KEY_WATER
+	      tmp_row << col.colorize(:color => :white, :background => :blue)
+	    when MAP_KEY_MOUNTAIN
+	      tmp_row << col.colorize(:color => :yellow, :background => :green)
+	    when MAP_KEY_ENEMY
+	      tmp_row << col.colorize(:color => :red, :background => :green)
+	  end
+        end
         x += 1
       end
       buffer << tmp_row

@@ -35,6 +35,12 @@ STORY_AREA_ENEMY = [
   "You encounter an enemy!"
 ]
 
+STORY_PLAYER_DEAD = [
+  "You have died.",
+  "",
+  "You failed to reach the Sourcerer. Please try again.",
+]
+
 class Story
 
   def intro
@@ -55,6 +61,10 @@ class Story
 
   def area_enemy
     return STORY_AREA_ENEMY
+  end
+
+  def player_dead
+    return STORY_PLAYER_DEAD
   end
 	
 end
