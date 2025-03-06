@@ -5,13 +5,13 @@ Legend of the Sourcerer is an open-source text-based adventure game written in R
 # Credits 
 Written by Robert W. Oliver II
 
-* Email: robert@cidergrove.com
-* Sourcerer: https://sourcerer.io/rwoliver2
+* Email: me@rwo2.com
+* GitHub: https://github.com/rwoliver2/lots
 * Twitter: @rwoliver2
 
 # Copyright
 
-Copyright (C) 2018 Sourcerer, All Rights Reserved.
+Copyright (C) 2018 Robert Oliver / Sourcerer, All Rights Reserved.
 
 # License
 
